@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2592,11 +2592,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307440066}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.45, y: 2.11, z: 0}
-  m_LocalScale: {x: 0.041666668, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -5.3999996, y: 2.31, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 1958885939}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1307440069
 BoxCollider:
@@ -2609,8 +2609,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6, y: 6.1584206, z: 1}
-  m_Center: {x: 0.8000047, y: -0.09531236, z: 0}
+  m_Size: {x: 2.632411, y: 6.1584206, z: 1}
+  m_Center: {x: 0.20556498, y: -0.09531236, z: 0}
 --- !u!54 &1307440070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2625,7 +2625,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!114 &1307440071
 MonoBehaviour:
@@ -3593,11 +3593,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1924766295}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.45, y: 2.11, z: 0}
-  m_LocalScale: {x: -0.041666668, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 5.3999996, y: 2.31, z: 0}
+  m_LocalScale: {x: -0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 1958885939}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1924766297
 BoxCollider:
@@ -3610,8 +3610,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6, y: 6.1584206, z: 1}
-  m_Center: {x: 0.8000047, y: -0.09531236, z: 0}
+  m_Size: {x: 2.0646553, y: 6.1584206, z: 1}
+  m_Center: {x: -0.10282326, y: -0.09531236, z: 0}
 --- !u!54 &1924766298
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3626,7 +3626,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!212 &1924766299
 SpriteRenderer:
@@ -3797,9 +3797,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 12, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1307440068}
-  - {fileID: 1924766296}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3824,8 +3822,6 @@ MonoBehaviour:
   InputField_Distance: {fileID: 898871939}
   Monita: {fileID: 1307440070}
   Atinom: {fileID: 1924766298}
-  Monita_pos: {fileID: 1307440068}
-  Atinom_pos: {fileID: 1924766296}
 --- !u!1 &1984086496
 GameObject:
   m_ObjectHideFlags: 0

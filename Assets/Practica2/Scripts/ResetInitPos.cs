@@ -19,7 +19,7 @@ public class ResetInitPos : MonoBehaviour
     public void ResetPosition()
     {
         //this.GetComponent<Rigidbody>().detectCollisions = false;
-        this.GetComponent<Rigidbody>().mass = 0;
+        //this.GetComponent<Rigidbody>().mass = 0;
 
         this.transform.position = initialPos;
         this.transform.rotation = initialRot;
