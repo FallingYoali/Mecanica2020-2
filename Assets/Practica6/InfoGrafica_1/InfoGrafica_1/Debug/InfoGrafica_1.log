@@ -1,0 +1,12 @@
+﻿  main.cpp
+C:\Users\Amerike\source\repos\InfoGrafica_1\InfoGrafica_1\main.cpp(153,58): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Amerike\source\repos\InfoGrafica_1\InfoGrafica_1\main.cpp(153,47): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Amerike\source\repos\InfoGrafica_1\InfoGrafica_1\main.cpp(177,58): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Amerike\source\repos\InfoGrafica_1\InfoGrafica_1\main.cpp(177,47): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Amerike\source\repos\InfoGrafica_1\InfoGrafica_1\main.cpp(181,21): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Amerike\source\repos\InfoGrafica_1\InfoGrafica_1\main.cpp(189,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Amerike\source\repos\InfoGrafica_1\InfoGrafica_1\main.cpp(201,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Amerike\source\repos\InfoGrafica_1\InfoGrafica_1\main.cpp(201,46): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Amerike\source\repos\InfoGrafica_1\InfoGrafica_1\main.cpp(201,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Amerike\source\repos\InfoGrafica_1\InfoGrafica_1\main.cpp(201,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  InfoGrafica_1.vcxproj -> C:\Users\Amerike\source\repos\InfoGrafica_1\Debug\InfoGrafica_1.exe
