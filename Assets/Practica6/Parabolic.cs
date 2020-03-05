@@ -5,33 +5,59 @@ using UnityEngine;
 
 public class Parabolic : MonoBehaviour
 {
+    //Variables for calculations
     float v_initial;
     float degree;
     float x_distance;
+    float mid_x;
+    float time_y;
     float time;
     float y_distance;
     float gravity;
 
-
+    //Canvas
     public TMPro.TMP_InputField v_initial1;
     public TMPro.TMP_InputField degree1;
     public TMPro.TMP_Text x_distance1;
     public TMPro.TMP_Text time1;
     public TMPro.TMP_Text y_distance1;
 
+    
+    //Variable to reset rocket
+    Vector3 refresh_position;
+
+    //Variables to move the rocket
+    Vector3 initial_position;
+    Vector3 midway_position;
+    Vector3 final_position;
+    float t = 0.0f;
+    bool takeOff = false;
+    bool goingUp = false;
+    bool goingDown = false;
+   
+
     public void ParabolicThrow()
     {
+        //Resetting variables
+        this.transform.position = refresh_position;
+        initial_position = refresh_position;
+        midway_position = refresh_position;
+        final_position = refresh_position;
+        goingDown = false;
+
+        //Get variables from canvas
         v_initial = float.Parse(v_initial1.text);
         degree = float.Parse(degree1.text);
+
 
         //Change degrees to radians
         degree = Mathf.Deg2Rad * degree;
 
         //time at highest peak in y
-        time = (v_initial * Mathf.Sin(degree)) / (gravity);
+        time_y = (v_initial * Mathf.Sin(degree)) / (gravity);
 
         //How high does it go?
-        y_distance = (v_initial * Mathf.Sin(degree) * time) - (0.5f * gravity * time * time);
+        y_distance = (v_initial * Mathf.Sin(degree) * time_y) - (0.5f * gravity * time_y * time_y);
 
         //Time where the rocket connects to the ground and its y velocity equals 0
         time = (v_initial * Mathf.Sin(degree)) / (0.5f * gravity);
@@ -39,19 +65,50 @@ public class Parabolic : MonoBehaviour
         //distance travelled
         x_distance = v_initial * Mathf.Cos(degree) * time;
 
+        //x distance when y is at its highest peak
+        mid_x = v_initial * Mathf.Cos(degree) * time_y;
 
+        //show results in canvas
         x_distance1.text = x_distance.ToString();
         time1.text = time.ToString();
         y_distance1.text = y_distance.ToString();
-}
+
+        takeOff = true;
+
+        final_position = initial_position;
+        final_position.x += mid_x;  // x_distance;
+        final_position.y += y_distance;
+        midway_position = final_position;
+    }
 
     void Start()
     {
+        initial_position = this.transform.position;
+        refresh_position = initial_position;
         gravity = 9.8f;
-        //y = v_initial + v_initial * sin(degree) * time - 1/2 * gravity * time to the power of two
-
-
     }
 
+    private void FixedUpdate()
+    {
+        //Move rocket
+        if (takeOff)
+        { 
+            this.transform.position = Vector3.Lerp(initial_position, final_position, t);
+            t += 0.4f * Time.deltaTime;
 
+            if (t > 1.0f)
+            {
+                final_position = initial_position;
+                final_position.x += x_distance;
+                initial_position = midway_position;
+                t = 0.0f;
+                if (goingDown)
+                {
+                    goingDown = false;
+                    takeOff = false;
+                }
+                goingDown = true;
+            }
+        }
+    }
 }
