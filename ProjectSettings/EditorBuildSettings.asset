@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Practica2.unity
     guid: 5b53166f2c3314948a88df2291faf8a7
+  - enabled: 1
+    path: Assets/Scenes/Parcial1_Examen.unity
+    guid: d042e265607889344afe25291372b358
   m_configObjects: {}
