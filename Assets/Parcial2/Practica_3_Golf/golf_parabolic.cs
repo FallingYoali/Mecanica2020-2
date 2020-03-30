@@ -1,27 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class golf_parabolic : MonoBehaviour
 {
     //Variables for calculations
-    float v_initial;
-    float degree;
-    float x_distance;
-    float mid_x;
-    float time_y;
-    float time;
-    float y_distance;
-    float gravity;
-    float force;
-    float acc;
-    float weight;
+    float v_initial, degree, x_distance, mid_x, time_y, time, y_distance, gravity, force, acc_x, acc_y, weight;
+
+    int limit;
+    float connection_time;
 
     //Canvas
     public TMPro.TMP_Text distance;
-    public TMPro.TMP_Text acceleration;
+    public TMPro.TMP_Text acceleration_x;
+    public TMPro.TMP_Text acceleration_y;
     public TMPro.TMP_InputField degree1;
     public TMPro.TMP_Text force1;
+    public Slider slider;
+    
 
     //Variable to reset rocket
     Vector3 refresh_position;
@@ -33,7 +31,6 @@ public class golf_parabolic : MonoBehaviour
     Vector3 final_position;
     float t = 0.0f;
     bool takeOff = false;
-    bool goingDown = false;
 
 
     //Line
@@ -42,39 +39,43 @@ public class golf_parabolic : MonoBehaviour
     Vector3 previous_pos;
     public GameObject myLine;
 
-
     public List<Vector3> pos;
 
     void Start()
     {
         initial_position = this.transform.position;
         refresh_position = initial_position;
-
-        acc = 0;
+         
+        
         weight = 1;
+        connection_time = 0.05f;
+        
 
         gravity = 9.8f;
         pos = new List<Vector3>();
     }
 
-
-    public void ParabolicThrow()
+    public void CalculateThrow()
     {
+        force = slider.value;
+        
         //Resetting variables
         this.transform.position = refresh_position;
         initial_position = refresh_position;
         midway_position = refresh_position;
         final_position = refresh_position;
-        goingDown = false;
 
         //Get variables from canvas
-        
-        force = float.Parse(force1.text);
+        force1.text = force.ToString();
         degree = float.Parse(degree1.text);
 
-        acc = force / weight;
+        //Getting the accelerations
+        acc_x = 0;
+        acc_y = -(gravity);
 
-    
+        //Getting the initial velocity from the force applied by the club
+        v_initial = (force * connection_time) / weight;
+
         //Change degrees to radians
         degree = Mathf.Deg2Rad * degree;
 
@@ -95,31 +96,46 @@ public class golf_parabolic : MonoBehaviour
 
         //show results in canvas
         distance.text = x_distance.ToString();
-        //y_distance1.text = y_distance.ToString();
-
-        takeOff = true;
+        acceleration_x.text = acc_x.ToString();
+        acceleration_y.text = acc_y.ToString();
 
         final_position = initial_position;
         final_position.x += mid_x;  // x_distance;
         final_position.y += y_distance;
         midway_position = final_position;
+    }
 
+    public void ParabolicThrow()
+    {
+        Debug.Log("Parabolic throw Called!");
+        pos.Clear();
+        
+        //Draw Curve
         lr = myLine.GetComponent<LineRenderer>();
         lr.positionCount = 20;
-        lr.SetPosition(0, refresh_position);
+        lr.SetPosition(0, this.transform.position);
 
-        //Draw Curve
         t = 0;
-        int place = 0;
-        while(t < time && place < lr.positionCount)
+        limit = 0;
+
+        for (float t = 0; t <= time; t += 0.05f)
         {
             float y = (v_initial * Mathf.Sin(degree) * t) - (0.5f * gravity * t * t);
             float x = v_initial * Mathf.Cos(degree) * t;
             cur_pos = new Vector3(x, y, this.transform.position.z);
             pos.Add(cur_pos);
-
-            lr.SetPosition(place, cur_pos);
+            limit++;
+           
         }
+
+        lr.positionCount = limit;
+
+        for (int place = 0; place < lr.positionCount; place++)
+        {
+            lr.SetPosition(place, pos[place]);
+        }
+        limit = 0;
+        takeOff = true;
     }
 
     private void FixedUpdate()
@@ -127,10 +143,31 @@ public class golf_parabolic : MonoBehaviour
         //Move rocket
         if (takeOff)
         {
-            for(int i = 0; i < pos.Count; i++)
-            {
-                this.transform.position = Vector3.Lerp(this.transform.position, pos[i], t);
-            }
+            StartCoroutine(ThrowSteps(time / (float)(pos.Count)));
         }
+    }
+
+    IEnumerator ThrowSteps(float _time)
+    {
+        yield return new WaitForSeconds(_time);
+        Debug.Log("Routine called " + pos.Count);
+        if(pos.Count <= 0)
+        {
+            Debug.Log("Cancelled");
+
+            float y = (v_initial * Mathf.Sin(degree) * time) - (0.5f * gravity * time * time);
+            float x = v_initial * Mathf.Cos(degree) * time;
+            final_position = new Vector3(x, y, this.transform.position.z);
+
+            this.transform.position = Vector3.Slerp(this.transform.position, final_position, _time);
+            takeOff = false;
+        }
+        else
+        {
+            Debug.Log("else");
+            this.transform.position = Vector3.Slerp(this.transform.position, pos[0], _time);
+            pos.RemoveAt(0);
+        }
+       
     }
 }
