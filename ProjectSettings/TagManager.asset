@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bouncer
+  - plank1
+  - STOP
+  - wall
   layers:
   - Default
   - TransparentFX
