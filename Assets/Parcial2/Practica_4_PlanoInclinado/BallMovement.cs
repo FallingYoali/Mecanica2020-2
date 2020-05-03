@@ -110,14 +110,39 @@ public class BallMovement : MonoBehaviour
             case 5:  //3rd fall
                 step++;
                 Debug.Log("Second fall");
-                CalculateFall2();
+                CalculateFall2(25.0f);
                 break;
             case 6:  //3rd plank down
                 step++;
+                Debug.Log("Third Plank!");
+                CalculateMovePlank3();
+                break;
+            case 7:  //3rd fall
+                Debug.Log("Third Fall");
+                StartCoroutine(ShootRay(Vector3.down));
+                step++;
+                CalculateFall3(40);
                 break;
         }
     }
-   
+   void CalculateMovePlank3()
+    {
+        StartCoroutine(ShootRay(Vector3.left));
+        CalculateTime();
+        float angle = 40;
+        float x = distance;
+        float y = x * Mathf.Tan(angle);
+
+        Vector3 a = transform.position;
+        Vector3 b = transform.position;
+
+        b.y += (y - 0.8f);
+        b.x -= (x + 0.8f);
+        t = 0.3f;
+       
+
+        StartCoroutine(MoveAcrossPlank(a, b, t));
+    }
     void CalculateMomentum(Transform plank)
     {
         float angle = 25;// plank.eulerAngles.z;
@@ -144,16 +169,65 @@ public class BallMovement : MonoBehaviour
         startTime = Time.time;
         StartCoroutine(MoveAcrossPlank(a, b, t));
     }
-
-    void CalculateFall2()
+    void CalculateFall3(float _angle)
     {
-        angle = 25;
+        angle = _angle;
+        float v_y = vel * Mathf.Sin(angle);
+        
+
+        float t1 = (-v_y + Mathf.Sqrt(Mathf.Pow(v_y, 2) - (4 * (0.5f * g) * distance))) / (2 * (0.5f * g));
+        float t2 = (-v_y - Mathf.Sqrt(Mathf.Pow(v_y, 2) - (4 * (0.5f * g) * distance))) / (2 * (0.5f * g));
+        if (t1 >= 0)
+        {
+            t = t1;
+        }
+        else
+        {
+            t = t2;
+        }
+        t = t2;
+        distance = -distance;
+
+        float x = 2.0f;
+        float y = 3.02f;
+
+        Vector3 a = transform.position;
+        Vector3 b = transform.position;
+
+        b.x -= x;
+        b.y -= y;
+
+        Debug.Log(a);
+        Debug.Log(b);
+
+
+        startTime = Time.time;
+        float lerpValue = 0.0f;
+        while (lerpValue < t)
+        {
+
+            float distCovered = (Time.time - startTime) * vel;
+            Debug.Log(distCovered + " " + Time.time + " " + startTime);
+            float fraccion = distCovered / (distance);
+            Debug.Log("f: " + fraccion);
+            transform.position = Vector3.Lerp(a, b, fraccion);
+
+            lerpValue += Time.deltaTime;
+           
+        }
+        CalculationsManager();
+
+    }
+    void CalculateFall2(float _angle)
+    {
+        angle = _angle;
         float v_y = vel * Mathf.Sin(angle);
         distance = -3.11467f;
 
         float t1 = (-v_y + Mathf.Sqrt(Mathf.Pow(v_y, 2) - (4 * (0.5f * g) * distance))) / (2 * (0.5f * g));
         float t2 = (-v_y - Mathf.Sqrt(Mathf.Pow(v_y, 2) - (4 * (0.5f * g) * distance))) / (2 * (0.5f * g));
-
+        t1 = -0.94053f;
+        t2 = 0.6758338f;
         if (t1 >= 0)
         {
             t = t1;
@@ -173,18 +247,7 @@ public class BallMovement : MonoBehaviour
         b.x += x;
         b.y -= y;
 
-        Debug.Log("angle: " + angle);
-        Debug.Log(Mathf.Cos(25));
-        Debug.Log("vel: " + vel);
-        Debug.Log("t: " + t);
-        Debug.Log("t1: " + t1);
-        Debug.Log("t2: " + t2);
-
-        Debug.Log("x: " + x);
-        Debug.Log("y: " + y);
-
-        Debug.Log("a: " + a);
-        Debug.Log("b: " + b);
+       
 
         startTime = Time.time;
         StartCoroutine(MoveFreeFall(a, b, t));
@@ -285,6 +348,7 @@ public class BallMovement : MonoBehaviour
         float lerpValue = 0.0f;
         while (lerpValue < t)
         {
+
             float distCovered = (Time.time - startTime) * vel;
             float fraccion = distCovered / (distance);
             b.y += 0.001f;
