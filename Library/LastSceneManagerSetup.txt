@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Parcial2/Practica_4_PlanoInclinado.unity
+- path: Assets/Scenes/Parcial3/Practica1_PinBall.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
