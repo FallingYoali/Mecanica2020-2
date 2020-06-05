@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Parcial3/Practica1_PinBall.unity
+- path: Assets/Scenes/Parcial4/ForceField_Practica1.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
