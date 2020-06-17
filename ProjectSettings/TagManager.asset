@@ -8,6 +8,7 @@ TagManager:
   - plank1
   - STOP
   - wall
+  - Spring
   layers:
   - Default
   - TransparentFX

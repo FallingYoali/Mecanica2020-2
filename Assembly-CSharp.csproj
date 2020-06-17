@@ -79,6 +79,7 @@
     <Compile Include="Assets\Parcial4\ForceField_Practica1\MovableParticle.cs" />
     <Compile Include="Assets\Parcial4\ForceField_Practica1\ParticleManager.cs" />
     <Compile Include="Assets\Parcial4\ForceField_Practica1\ParticleWithCharge.cs" />
+    <Compile Include="Assets\Parcial4\OscillationSpring\JoinTogether.cs" />
     <Compile Include="Assets\Parcial4\OscillationSpring\SpringOscillation.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
